@@ -1,10 +1,10 @@
-----
+---
 layout:     post                   
 title:      RoboMaster 2019机甲大赛决赛 无人机立奇功 助东北大学夺冠               
 subtitle:   【转载自5imx,侵删】 
-date:       2017-02-06              
+date:       2018-8-30              
 author:     NAFK炸了                      
-header-img: rm2019.jpg    
+header-img: img/rm2019.jpg    
 catalog: true                       
 tags:                              
     - 机器人
