@@ -1,12 +1,12 @@
 ----
-layout:     post                    # 使用的布局（不需要改）
-title:      RoboMaster 2019机甲大赛决赛 无人机立奇功 助东北大学夺冠               # 标题 
-subtitle:   【转载自5imx,侵删】 #副标题
-date:       2017-02-06              # 时间
-author:     NAFK炸了                      # 作者
-header-img: rm2019.jpg    #这篇文章标题背景图片
-catalog: true                       # 是否归档
-tags:                               #标签
+layout:     post                   
+title:      RoboMaster 2019机甲大赛决赛 无人机立奇功 助东北大学夺冠               
+subtitle:   【转载自5imx,侵删】 
+date:       2017-02-06              
+author:     NAFK炸了                      
+header-img: rm2019.jpg    
+catalog: true                       
+tags:                              
     - 机器人
 ---
 （2019年8月11日深圳）第十八届全国大学生机器人大赛RoboMaster 2019机甲大师总决赛在深圳市宝安体育中心体育馆落下帷幕。来自全球10余个国家及地区的174支战队参赛，从分区赛、国际预选赛、复活赛，最终脱颖而出32强队伍，通过6天的决赛，最终东北大学击败上海交通大学，摘得RoboMaster 2019机甲大师赛冠军，成为RoboMaster机甲大师赛历史上第三个拥有冠军奖杯的高校队伍。
