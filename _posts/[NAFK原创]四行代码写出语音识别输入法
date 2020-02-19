@@ -1,0 +1,21 @@
+---
+layout:     post   				    # 使用的布局（不需要改）
+title:      [NAFK原创]四行代码写出语音识别输入法 				# 标题 
+subtitle:   利用speech库与python3搭建语音识别输入法 #副标题
+date:       2020-2-19 				# 时间
+author:     NAFK炸了 						# 作者
+header-img: img/post-bg-2015.jpg 	#这篇文章标题背景图片
+catalog: true 						# 是否归档
+tags:								#标签
+    - python
+---
+[NAFK原创]四行代码写出语音识别输入法
+开发环境：python3.8 32位版
+  首先安装speech库。教程传送门：https://blog.csdn.net/dh549780443/article/details/79099374
+  接着编写代码：
+  
+  
+  import speech  #引用speech库
+  while True:
+      say = speech.input()  #接收语音
+      print(str(say))输出结果
