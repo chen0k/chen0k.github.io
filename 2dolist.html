@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日程表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .task-content {
+            display: flex;
+            align-items: center;
+        }
+        .task-content span {
+            margin-right: 10px;
+        }
+        .task-priority.high {
+            color: white;
+            background-color: red;
+        }
+        .task-priority.medium {
+            color: white;
+            background-color: orange;
+        }
+        .task-priority.low {
+            color: black;
+            background-color: green;
+        }
+        .add-task-form {
+            margin-top: 20px;
+        }
+        .add-task-form input, .add-task-form select, .add-task-form button {
+            margin-right: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .add-task-form input, .add-task-form select, .add-task-form button {
+                width: calc(100% - 40px);
+                margin-bottom: 10px;
+                margin-right: 0;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>日程表</h1>
+        <ul class="task-list" id="taskList"></ul>
+        <div class="add-task-form" id="addTaskForm">
+            <input type="text" id="taskContent" placeholder="任务内容">
+            <input type="datetime-local" id="taskDate">
+            <select id="taskPriority">
+                <option value="low">低</option>
+                <option value="medium">中</option>
+                <option value="high">高</option>
+            </select>
+            <button onclick="addTask()">添加任务</button>
+        </div>
+    </div>
+
+    <script>
+        // 加载保存的任务
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+            tasks.forEach(task => {
+                createTaskItem(task);
+            });
+        }
+
+        // 保存任务到本地存储
+        function saveTasks() {
+            const taskList = document.getElementById('taskList');
+            const tasks = [];
+            taskList.querySelectorAll('.task-item').forEach(item => {
+                const taskContent = item.querySelector('.task-content span:nth-child(1)').innerText;
+                const taskDate = item.querySelector('.task-content span:nth-child(2)').innerText;
+                const taskPriority = item.querySelector('.task-priority').innerText;
+                tasks.push({ taskContent, taskDate, taskPriority });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // 创建任务项
+        function createTaskItem(task) {
+            const taskList = document.getElementById('taskList');
+            const li = document.createElement('li');
+            li.classList.add('task-item');
+
+            const taskContent = document.createElement('div');
+            taskContent.classList.add('task-content');
+            const contentSpan = document.createElement('span');
+            contentSpan.innerText = task.taskContent;
+            const dateSpan = document.createElement('span');
+            dateSpan.innerText = task.taskDate;
+            taskContent.appendChild(contentSpan);
+            taskContent.appendChild(dateSpan);
+
+            const prioritySpan = document.createElement('span');
+            prioritySpan.classList.add('task-priority', task.taskPriority.toLowerCase());
+            prioritySpan.innerText = task.taskPriority;
+
+            const removeButton = document.createElement('button');
+            removeButton.innerText = '删除';
+            removeButton.onclick = () => {
+                taskList.removeChild(li);
+                saveTasks(); // 每次删除后都保存任务
+            };
+
+            li.appendChild(taskContent);
+            li.appendChild(prioritySpan);
+            li.appendChild(removeButton);
+
+            taskList.appendChild(li);
+        }
+
+        // 添加任务
+        function addTask() {
+            const taskContent = document.getElementById('taskContent').value;
+            const taskDate = document.getElementById('taskDate').value;
+            const taskPriority = document.getElementById('taskPriority').value;
+
+            if (taskContent && taskDate) {
+                const newTask = { taskContent, taskDate, taskPriority };
+                createTaskItem(newTask);
+                document.getElementById('addTaskForm').reset();
+                saveTasks(); // 每次添加后都保存任务
+            } else {
+                alert('请填写任务内容和日期');
+            }
+        }
+
+        // 页面加载时加载任务
+        window.onload = loadTasks;
+
+        // 在页面卸载（关闭或刷新）时保存任务
+        window.onbeforeunload = saveTasks;
+    </script>
+</body>
+</html>
